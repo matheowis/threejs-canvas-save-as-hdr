@@ -1,4 +1,4 @@
-const hadrEmmisiveWorker =()=>{
+export const hadrEmmisiveWorker = () => {
   class ByteData {
     constructor(size) {
       this.binaryData = new Uint8Array(size);
@@ -38,25 +38,6 @@ const hadrEmmisiveWorker =()=>{
       array.push({ value: localVal, length: localLength + lengthConstant });
       return array;
     }
-    const getLineEmmisive = (y = 0) => {
-      const array = [];
-      let localVal = 0, localLength = 0;
-      const lengthConstant = 128;
-      for (var i = 0; i < width * 4; i += 4) {
-        if (localLength === 0) {
-          localVal = emmisiveBuffer[topIndex(y) + i];
-          localLength++;
-        } else if (localVal === emmisiveBuffer[topIndex(y) + i] && localLength < 127) {
-          localLength++;
-        } else {
-          array.push({ value: localVal, length: localLength + lengthConstant });
-          localVal = emmisiveBuffer[topIndex(y) + i];
-          localLength = 1;
-        }
-      }
-      array.push({ value: localVal, length: localLength + lengthConstant });
-      return array;
-    }
 
     const compressed = [];
     let fileSize = 0;
@@ -64,10 +45,21 @@ const hadrEmmisiveWorker =()=>{
       const lineReds = getLine(i, 0);
       const lineGreens = getLine(i, 1);
       const lineBlues = getLine(i, 2);
-      const lineEmissive = getLineEmmisive(i);
+      const lineEmissive = getLine(i, 3);
       const lineInitiator = 4;
       fileSize += lineInitiator + lineReds.length * 2 + lineGreens.length * 2 + lineBlues.length * 2 + lineEmissive.length * 2;
       compressed.push([lineReds, lineGreens, lineBlues, lineEmissive]);
     }
+    console.log(`Worker, hdr file size = ${(fileSize / 1024).toFixed(2)}kb`);
+    const lineSize = new Uint8Array(new Uint16Array([width]).buffer);
+    const byteData = new ByteData(fileSize);
+
+    for (var i = 0; i < height; i++) {
+      byteData.push(2, 2, lineSize[1], lineSize[0]);//line iniciators // no idea why but linesize is flipped
+      for (var k = 0; k < 4; k++) {
+        compressed[i][k].map(channel => { byteData.push(channel.length, channel.value); })
+      }
+    }
+    self.postMessage({ binary: byteData.binaryData });
   });
 }
