@@ -1,4 +1,4 @@
-export const insideWorker = () => {
+export const hdrWorker = () => {
   class ByteData {
     constructor(size) {
       this.binaryData = new Uint8Array(size);
@@ -16,7 +16,7 @@ export const insideWorker = () => {
     const width = event.data.width;
     const height = event.data.height;
     const rgbBuffer = event.data.rgbBuffer;
-
+    
     const topIndex = y => (width * height * 4) - (width * 4) - (width * y * 4);
     const getLine = (y = 0, offSet = 0) => {
       const array = [];
@@ -37,7 +37,7 @@ export const insideWorker = () => {
       array.push({ value: localVal, length: localLength + lengthConstant });
       return array;
     }
-    const getEmmisiveLine = (emmisive = 128) => {
+    const getEmmisiveStaticLine = (emmisive = 128) => {
       const array = [];
       let localLength = 0;
       const lengthConstant = 128;
@@ -59,7 +59,7 @@ export const insideWorker = () => {
       const lineReds = getLine(i, 0);
       const lineGreens = getLine(i, 1);
       const lineBlues = getLine(i, 2);
-      const lineEmissive = getEmmisiveLine();
+      const lineEmissive = getEmmisiveStaticLine();
       const lineInitiator = 4;
       fileSize += lineInitiator + lineReds.length * 2 + lineGreens.length * 2 + lineBlues.length * 2 + lineEmissive.length * 2;
       compressed.push([lineReds, lineGreens, lineBlues, lineEmissive]);
@@ -73,9 +73,7 @@ export const insideWorker = () => {
       for (var k = 0; k < 4; k++) {
         compressed[i][k].map(channel => { byteData.push(channel.length, channel.value); })
       }
-      console.log('y =', i, 'byteIndex = ', byteData._cIndex);
     }
-    // console.log('worker-compressed',compressed);
     self.postMessage({ binary: byteData.binaryData });
   })
 }

@@ -11,7 +11,7 @@
   "license": "ISC",
   "devDependencies": {
     "raw-loader": "^0.5.1",
-    "three": "^0.97.0",
+    "three": "^0.94.0",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.6"
