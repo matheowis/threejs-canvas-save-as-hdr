@@ -1,12 +1,10 @@
 import * as THREE from 'three';
 import { hdrConverterEmmisive } from './hdrConverterEmissive';
 import { sphereMaterial } from './materials/sphereMaterial';
-// const cWidth = 320, cHeight = 180;
 const cWidth = 1280, cHeight = 720;
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 const scene = new THREE.Scene();
-// const camera = new THREE.PerspectiveCamera(70, 16 / 9, 0.1, 2000);
 const camera = new THREE.OrthographicCamera(cWidth / -2, cWidth / 2, cHeight / 2, cHeight / -2, 1, 1000);
 renderer.setSize(cWidth, cHeight);
 
@@ -26,10 +24,6 @@ boxMeshLU.position.set(-cWidth / 4, 0, -300);
 scene.add(boxMesh, boxMeshLU, shereMesh);
 const renderTarget = new THREE.WebGLRenderTarget(cWidth, cHeight);
 
-// renderer.render(scene, camera);
-// renderer.render(scene, camera, renderTarget);
-// const pixelData = new Uint8Array(cWidth * cHeight * 4);
-// renderer.readRenderTargetPixels(renderTarget, 0, 0, cWidth, cHeight, pixelData);
 render()
 function render() {
   requestAnimationFrame(render)
@@ -54,17 +48,3 @@ a.addEventListener('click', e => {
     a.download = 'shouldWork.hdr';
   })
 })
-
-
-// hdrConverter(cWidth, cHeight, pixelData).then(binary => {
-//   const header = 'FORMAT=32-bit_rle_rgbe\n';
-//   const blankSpace = '\n';
-//   const Resolution = `-Y ${cHeight} +X ${cWidth}\n`;
-//   let text = header + blankSpace + Resolution;
-//   // console.log(binary)
-//   const a = document.getElementById('download');
-//   var blob = new Blob([text, binary], { type: "octet/stream" });
-//   var url = URL.createObjectURL(blob);
-//   a.href = url;
-//   a.download = 'shouldWork.hdr';
-// });

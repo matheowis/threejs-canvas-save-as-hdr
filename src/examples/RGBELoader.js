@@ -346,6 +346,5 @@ RGBELoader.prototype._parser = function ( buffer ) {
 
 };
 
-// const RGBELoader = THREE.RGBELoader;
 console.log(RGBELoader);
 export {RGBELoader}

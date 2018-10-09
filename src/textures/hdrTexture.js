@@ -1,7 +1,6 @@
-import { Texture, RGBEEncoding, NearestFilter, DataTexture } from 'three';
+import { RGBEEncoding, NearestFilter, DataTexture } from 'three';
 import { RGBELoader } from '../examples/RGBELoader';
 
-// export const HDRTexture = new Texture();
 export const HDRTexture = new DataTexture();
 
 const loader = new RGBELoader();
