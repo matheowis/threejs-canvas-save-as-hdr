@@ -70,6 +70,8 @@
   var blob = new Blob([text, binary], { type: "octet/stream" });
   ```
   That blob contains image in hdr format
+  
+  more info about hdr format at http://radsite.lbl.gov/radiance/refer/filefmts.pdf page 28
 
 
 
