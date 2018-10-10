@@ -3,6 +3,7 @@
   I'll do it later
 ## hdr format tutorial
 ![alt text](https://matheowis.github.io/threejs-canvas-save-as-hdr/images/tutorial-img.png)
+
 Lets say we want to save the image above to hdr format
 ```
 Color(red, green, blue, emmisive)
