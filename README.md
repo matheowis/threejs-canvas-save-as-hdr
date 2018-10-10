@@ -28,7 +28,7 @@ Now we can start writting pixel values
 
 Wy start with amount of repetition, where 128 means 0, this part i couldn't really understand, but based on photoshop files, I found out that only positive values are used, so maximum repetition is 255 which means 127
 
-###Channels
+### Channels
 We define each channel separately, start with all reds in the row,then greens and so on.
 reds:
 ```
@@ -46,11 +46,11 @@ emmisives:
 ```
 255, 128, 255, 128, 194, 128
 ```
-###Full line would look like
+### Full line would look like
 ```
 2, 2, 1, 64, 255, 20, 161, 20, 255, 150, 161, 150, 255, 70, 161, 70, 255, 130, 161, 130, 255, 150, 161, 150, 255, 40, 161, 40, 255, 128, 255, 128, 194, 128
 ```
-###Binary Data
+### Binary Data
 
 You can save binary with new Uint8Array()
 ```
