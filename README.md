@@ -9,6 +9,7 @@
   ### Demo
 
   You can check out Demo on https://matheowis.github.io/threejs-canvas-save-as-hdr
+  
   You have to click download text twice to download the image, then open it in a software that supports hdr
 
 ## HDR format tutorial
