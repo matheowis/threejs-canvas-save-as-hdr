@@ -4,25 +4,18 @@ import { sphereMaterial } from './materials/sphereMaterial';
 const cWidth = 1280, cHeight = 720;
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+const renderTarget = new THREE.WebGLRenderTarget(cWidth, cHeight);
 const scene = new THREE.Scene();
 const camera = new THREE.OrthographicCamera(cWidth / -2, cWidth / 2, cHeight / 2, cHeight / -2, 1, 1000);
 renderer.setSize(cWidth, cHeight);
 
 document.body.appendChild(renderer.domElement);
-const pixelSize = 50;
 const sphereGeo = new THREE.SphereGeometry(300, 100, 100);
 const shereMesh = new THREE.Mesh(sphereGeo, sphereMaterial);
 shereMesh.position.z = -400;
-const redMat = new THREE.MeshBasicMaterial({ color: 0xaa0a0a })
-const blueMat = new THREE.MeshBasicMaterial({ color: 0x0808aa })
-const box = new THREE.BoxGeometry(pixelSize, pixelSize, pixelSize);
-const boxMesh = new THREE.Mesh(box);
-boxMesh.position.set(cWidth / 4, 0, -300);
-const boxMeshLU = new THREE.Mesh(box);
-boxMeshLU.position.set(-cWidth / 4, 0, -300);
 
-scene.add(boxMesh, boxMeshLU, shereMesh);
-const renderTarget = new THREE.WebGLRenderTarget(cWidth, cHeight);
+
+scene.add(shereMesh);
 
 render()
 function render() {
