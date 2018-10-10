@@ -32,7 +32,7 @@
   Now lets take care of pixelData
 
   We have to write each line of pixels starting from upper left image corner.
-  First two bytes of each line have to be (2, 2) - that defines the format of pixel data,
+  First two bytes of each line have to be (2, 2) - that defines the format, which is **adaptive run length encoding**,
   another two bytes defines the length of pixel row in this situation its 320 so in bytes (1,64).
 
   Now we can start writting pixel values
