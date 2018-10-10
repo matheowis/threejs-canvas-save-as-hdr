@@ -1,4 +1,4 @@
-# Saving canvs to hdr file format
+# Saving canvas to hdr file format
 ## project overview
   I'll do it later
 ## hdr format tutorial
@@ -25,7 +25,7 @@ another two bytes defines the length of pixel row in this situation its 320 so i
 
 Now we can start writting pixel values
 
-so wy start with amout of repetition,where 128 means 0, this part i couldn't really understand, but based on photoshop files, I found out that only positive values are used
+Wy start with amount of repetition, where 128 means 0, this part i couldn't really understand, but based on photoshop files, I found out that only positive values are used, so maximum repetition is 255 which means 127
 
 ###Channels
 We define each channel separately, start with all reds in the row,then greens and so on.
@@ -57,7 +57,7 @@ var text = header + blankSpace + Resolution;
 var binary = new Uint8Array([pixelData]) // bytes that we created above
 var blob = new Blob([text, binary], { type: "octet/stream" });
 ```
-that blob contains image in hdr format
+That blob contains image in hdr format
 
 
 
